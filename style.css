@@ -1,6 +1,7 @@
 :root {
+    /* ألوان قديمة (خليتها كما هي عشان الصفحات الثانية ما تنكسر) */
     --color-primary: #1A3EC1;
-    --color-primary-light: hsla(242, 91%, 69%, 18%);
+    --color-primary-light: hsla(233, 91%, 69%, 0.18);
     --color-primary-variant: #5854c745;
     --color-red: #da0f3f;
     --color-red-light: hsl(346, 87%, 46%, 15%);
@@ -15,6 +16,18 @@
     --color-white: #f2f2fe;
     --color-bg: #0f0f32;
     --color-white-1:#F8F9F7;
+
+    /* ===== الألوان الجديدة (داكن + ذهبي) ===== */
+    --fai-bg: #0B0B14;          /* خلفية الصفحة */
+    --fai-bg-deep: #07070D;     /* الفوتر */
+    --fai-card: #14141F;        /* البطاقات */
+    --fai-border: #23232F;      /* الحدود */
+    --fai-gold: #E0A84B;        /* اللون المميز */
+    --fai-gold-soft: rgba(224, 168, 75, 0.15);
+    --fai-gold-line: rgba(224, 168, 75, 0.45);
+    --fai-text: #F4F1EA;        /* العناوين */
+    --fai-muted: #B9B7C4;       /* الوصف */
+    --fai-faint: #8E8C9C;       /* التواريخ والروابط الخفيفة */
 
     --transition: all 300ms ease;
 
@@ -42,9 +55,8 @@
 body{
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
-    color: var(--color-gray-900);
-   /* overflow: hidden;*/ /**/
-    background: var(--color-white-1) ;
+    color: var(--fai-muted);
+    background: var(--fai-bg);
     font-size: 0.9rem;
 }
 
@@ -57,18 +69,16 @@ body{
 .section{
     margin-top: 3rem;
     width: 100vw;
-
 }
 
 h1, h2, h3, h4, h5{
-    color: var(--color-gray-900);
+    color: var(--fai-text);
     line-height: 1.3;
 }
 
 h1{
     font-size: 3rem;
     margin: 1rem 0;
-
 }
 h2{
     font-size: 1.7rem;
@@ -83,27 +93,28 @@ h4{
 }
 
 a{
-    color: var(--color-white);
+    color: var(--fai-text);
     transition: var(--transition);
 }
 img{ 
     display: block;
     width: 100%;
-    height: 100%; /**/
+    height: 100%;
     object-fit: cover;
 }
 
 /*NAV========================================================================*/
 
 nav{
-    background: var( --color-gray-900);
+    background: rgba(11, 11, 20, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     width: 100vw;
     height: 4.5rem;
     position: fixed;/* يخلي النافبار ثابت بالأعلى حتى لو نزل المستخدم بالصفحة */
     top: 0;
     z-index: 10;  /* يضمن ظهور النافبار فوق أي عنصر ثاني بالصفحة */
-    box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
-    /**/
+    border-bottom: 1px solid var(--fai-border);
 }
 
 nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخفية افتراضياً بالشاشات الكبيرة */
@@ -122,18 +133,31 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
     height: 2.5rem;
     border-radius: 50%;
     overflow: hidden;
-    border: 0.3rem solid var(--color-bg);
+    border: 0.15rem solid var(--fai-gold);
 }
 
 .nav__logo{
-    font-weight: 600;
-    font-size: 1.2rem;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--fai-text);
+}
+.nav__logo::after{ /* نقطة ذهبية بعد الشعار */
+    content: '.';
+    color: var(--fai-gold);
 }
 
 .nav__items{
     display: flex;
     align-items:center;
     gap: 4rem;
+}
+.nav__items a{
+    color: var(--fai-muted);
+    font-weight: 500;
+}
+.nav__items a:hover{
+    color: var(--fai-gold);
 }
 
 .nav__profile{/* حاوية صورة البروفايل + القائمة المنسدلة الخاصة بيها */
@@ -146,8 +170,11 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
     right: 0;
     display: flex;
     flex-direction: column;
-    box-shadow: 0rem 3rem 3rem rgba(0, 0, 0, 0.4);
-    background: var(--color-gray-900);
+    box-shadow: 0rem 2rem 3rem rgba(0, 0, 0, 0.5);
+    background: var(--fai-card);
+    border: 1px solid var(--fai-border);
+    border-radius: 0.8rem;
+    overflow: hidden;
     visibility: hidden;
     opacity: 0;
     transition: var(--transition);
@@ -156,70 +183,77 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
 .nav__profile:hover >ul{ /* على الاب ">ul" معناها انه ياثر */
     visibility: visible;
     opacity: 1;
-     border-radius: 0.6rem;  /**/
 }
 
 .nav__profile ul li a{/* تنسيق روابط القائمة المنسدلة (Dashboard/Logout) */
      padding: 1rem;
-     background: var(--color-gray-900);
+     background: var(--fai-card);
      display: block;
      width: 100%;
-    
-
+}
+.nav__profile ul li a:hover{
+    background: var(--fai-gold-soft);
+    color: var(--fai-gold);
 }
 
 .nav__profile ul li:last-child a{
-    background: var(--color-red);
-    color: var(--color-bg);
+    background: var(--color-red-light);
+    color: #ff6b8a;
 }
 
 
 /*CATEGORY BUTTON========================================================================*/
 .category__button{        /*<a href=""class= "category__button">Wild Life</a>*/
-    background: var(--color-primary-light);
-    color: var(--color-primary);  
+    background: var(--fai-gold-soft);
+    color: var(--fai-gold);
+    border: 1px solid var(--fai-gold-line);
     display: inline-block;
-    padding: 0.5rem 1rem;
-    border-radius: var(--card-border-radius-2);
+    padding: 0.45rem 1.1rem;
+    border-radius: 999px;
     font-weight: 600;
     font-size: 0.8rem;
     text-align: center;
 }
-.category__button:hover{/* تغيير لون النص عند مرور الماوس فوق زر التصنيف */
-    color: var(--color-white);
+.category__button:hover{/* عند مرور الماوس: يتعبى ذهبي */
+    background: var(--fai-gold);
+    color: var(--fai-bg);
 }
 
 
 /*CENERAL POST ========================================================================*/
 .post__thumbnail{/* تنسيق عام لصورة المقال (تُستخدم بقسم Featured وقسم Posts معاً) */
     border-radius: var(--card-border-radius-4);
-    border: 0rem solid var(--color-gray-900);
     overflow: hidden;
     margin-bottom: 1.6rem;
 }
 .posts .post__thumbnail{/* تخصيص إضافي لصورة المقال بقسم Posts تحديداً */
     width: 100%;
     aspect-ratio: 4/3;
+    border-radius: 1.2rem;
+    margin-bottom: 1.2rem;
 }
 
-
-.post:hover .post__thumbnail img {/* تحويل الصورة لأبيض وأسود (Grayscale) عند مرور الماوس فوق كامل المقال */
-    filter: saturate(0);
-    transition: filter 500ms ease; /* حركة تدريجية سلسة للتأثير */
+.post__thumbnail img{
+    transition: transform 500ms ease;
+}
+.post:hover .post__thumbnail img {/* تكبير خفيف للصورة عند مرور الماوس فوق كامل المقال */
+    transform: scale(1.05);
 }
 
-
-  
 .post__author{/* حاوية معلومات كاتب المقال (الصورة + الاسم + التاريخ) */
      display: flex;
      gap: 1rem;
      margin-top : 1.2rem;
 }
+.post__author-info small{
+    color: var(--fai-faint);
+}
 
 .post__author-avatar{  
     width: 2.5rem;
     height: 2.5rem;
-    border-radius: var(--card-border-radius-3);
+    border-radius: 50%;
+    border: 2px solid var(--fai-gold);
     overflow: hidden; 
     flex-shrink: 0;
     object-fit: cover;
@@ -235,10 +269,24 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
-
+    align-items: center;
+    background: var(--fai-card);
+    border: 1px solid var(--fai-border);
+    border-radius: 2rem;
+    padding: 1.2rem;
 }
  .featured .post__thumbnail{/* تخصيص ارتفاع صورة Featured: يتبع نسبة الصورة نفسها بدل رقم ثابت */
     height: fit-content;
+    margin-bottom: 0;
+ }
+ .featured .post__info{
+    padding-right: 2rem;
+ }
+ .featured .post__title{
+    font-size: 2.4rem;
+ }
+ .featured .post__body{
+    font-size: 1rem;
  }
 
 
@@ -246,25 +294,43 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
  .posts__container{  /* قسم المقالات المتعددة (بطاقات White Dove) أسفل قسم Featured */
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
-    gap: 5rem;
+    gap: 2rem;
     margin-bottom: 5rem;
     margin-top: 1rem;
-    
+ }
+
+ .post{ /* كل مقال صار بطاقة */
+    background: var(--fai-card);
+    border: 1px solid var(--fai-border);
+    border-radius: 1.6rem;
+    padding: 1rem;
+    transition: var(--transition);
+ }
+ .post:hover{
+    border-color: var(--fai-gold-line);
+    box-shadow: 0 0 30px rgba(224, 168, 75, 0.12);
+ }
+ .post .post__info{
+    padding: 0.3rem 0.5rem 0.5rem;
  }
  .post__title a{
-    color: var(--color-gray-900);   /* أو أي لون تبينه */
-}
+    color: var(--fai-text);
+ }
+ .post__title a:hover{
+    color: var(--fai-gold);
+ }
+ .post__body{
+    color: var(--fai-muted);
+ }
 
 
   /* CATEGORY BUTTONS========================================================================*/
- 
 
 .category__buttons{
-    background: var(--color-gray-100);
-    padding: 5rem 0 0;
+    background: var(--fai-card);
     padding: 4rem 0;
-    border-top: 0.1px solid var(--color-gray-200);
-    border-bottom: 2px solid var(--color-gray-200);
+    border-top: 1px solid var(--fai-border);
+    border-bottom: 1px solid var(--fai-border);
 }
 
   .category__buttons-container{
@@ -272,22 +338,15 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
    display: grid;
    grid-template-columns: repeat(3, 1fr);
    gap: 1rem;
-
 }
- 
-/*.category__button-container{
-    padding: 4rem 0;
-    border-top: 2px solid var(--color-gray-900);
-    border-bottom: 2px solid var(--color-gray-900);
-   width: fit-content;
-   display: grid;
-   grid-template-columns: repeat(3, 1fr);
-   gap: 1rem;
+.category__buttons .category__button{
+    padding: 0.7rem 1.6rem;
+    font-size: 0.9rem;
+}
 
-}/*
   /* FOOTER========================================================================*/
  footer{  /* تذييل الصفحة (Footer) */
-    background: var(--color-gray-100);
+    background: var(--fai-bg-deep);
     padding: 5rem 0 0;
  }
  .footer__socials{  /* أيقونات التواصل الاجتماعي (لينكدإن، تويتر...) */
@@ -301,18 +360,20 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
  }
 
  .footer__socials a{ /* شكل دائري موحد لكل أيقونة تواصل اجتماعي */
-    background: var(--color-bg);
+    background: var(--fai-card);
+    border: 1px solid var(--fai-border);
+    color: var(--fai-gold);
     border-radius: 50%;
-    width: 2.3rem;
-    height: 2.3rem;
+    width: 2.5rem;
+    height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content:center ;
  }
 
  .footer__socials a:hover{  /* تغيير لون الأيقونة عند مرور الماوس فوقها */
-     background: var(--color-white);
-     color: var(--color-bg);
+     background: var(--fai-gold);
+     color: var(--fai-bg);
  }
 
  .footer__container{  /* تقسيم محتوى الفوتر الرئيسي لـ 4 أعمدة متساوية */
@@ -321,30 +382,92 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
  }
  
  footer h4{
-    color: var(--color-white);
+    color: var(--fai-text);
     margin-bottom: 0.6rem;
  }
  footer ul li{
     padding: 0.4rem;
  }
  footer ul a{
-    opacity: 0.75;  /* شفافية خفيفة للروابط بحالتها العادية */
+    color: var(--fai-faint);
  }
 
- footer ul a:hover{ /* تأثير عند مرور الماوس فوق روابط الفوتر: زيادة التباعد بين الحروف + وضوح كامل */
-
+ footer ul a:hover{ /* تأثير عند مرور الماوس فوق روابط الفوتر: زيادة التباعد بين الحروف */
     letter-spacing: 0.2rem;
-    opacity: 1;
+    color: var(--fai-gold);
  }
 
  .footer__copyright{  /* سطر حقوق النشر بأسفل الفوتر تماماً */
-
     text-align: center;
     padding: 1.5rem 0;
-    border-top: 2px solid var(--color-gray-200);
+    border-top: 1px solid var(--fai-border);
     margin-top: 4rem;
-    color: var(--color-white);
+    color: var(--fai-faint);
  }
+
+   /* search__bar========================================================================*/
+
+   .search__bar{
+    margin-top: 7rem;
+   }
+
+   .search__bar-container{
+    position: relative;
+    width: 30%;  
+    background: var(--fai-card);
+    border: 1px solid var(--fai-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    color: var(--fai-faint);
+   }
+   .search__bar-container:focus-within{
+    border-color: var(--fai-gold-line);
+   }
+   .search__bar-container>div{
+       width: 100%;
+       display: flex;
+       align-items: center;
+   }
+   .search__bar input{
+    background: transparent;
+    width: 100%;
+    margin-left: 0.7rem;
+    color: var(--fai-text);
+    padding: 0.1rem 1rem; /*Space between input and icon*/
+   }
+
+   .search__bar input::placeholder{
+    color: var(--fai-faint);
+   }
+   .search__bar button{
+    background: var(--fai-gold);
+    color: var(--fai-bg);
+    font-weight: 700;
+    padding: 0.3rem 1.2rem;
+    border-radius: 999px;
+    cursor: pointer;
+   }
+/*SINGLE POST===========================================================================================================*/
+.singlepost{
+    margin: 6rem 0 2rem;
+}
+    .singlepost__container{
+      width: var(--form-width);
+      background: var(--fai-bg-deep);
+      padding: 1rem 2rem 3rem;
+      border: 1px solid var(--fai-border);
+    }
+    .singlepost__thumbnail{
+        margin-top: 1.5rem; ;
+    }
+    .singlepost__container p{
+        margin-top: 1rem;
+        line-height: 1.7;
+    }
    
   /* MEDIA QUERIES (MEDIUM DEVICES)========================================================================*/
    
@@ -367,7 +490,7 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
             display: inline-block;
             font-size: 1.5rem;
             background: transparent;
-            color: var(--color-white); /*هنا ضفت opne &close*/
+            color: var(--fai-text);
             cursor: pointer;
         }
 
@@ -388,10 +511,12 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
             justify-content: center;
             gap: 0.2rem;           
             display: none; /*هنا اخفيت  nav to column */
-            background: rgba(9, 9, 73, 0.75); /**/
+            background: rgba(11, 11, 20, 0.92);
+            border: 1px solid var(--fai-border);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-             padding: 0.8rem; /**/
+            padding: 0.8rem;
+            border-radius: 0 0 1rem 1rem;
         }
         .nav__items li{
             width: 100%;
@@ -399,10 +524,7 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
             display: flex;
             animation: animateNavDropdown 400ms 0s ease forwards;
             opacity: 1;
-            transform: top;
         }
-
-   
 
         /*nav dropdown animation*/
         @keyframes animateNavDropdown{
@@ -420,15 +542,13 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
             width: 100%;
             height: 100%;
             padding:  0 2rem;
-            background: rgba(9, 9, 73, 0.75); 
+            background: var(--fai-card);
             display: flex;
             align-items: center;
         }
         .nav__profile{
-            background: var(--color-gray-900);
-            border-radius: 0.6rem; /**/
-
-
+            background: var(--fai-card);
+            border-radius: 0.6rem;
         }
         .nav__profile ul{
           top: 100%;
@@ -438,16 +558,24 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
             margin-left:  2rem;
             margin-top: 1rem;
             border: 0; 
-            
-    }
-}
+        }
+
 .footer__container{
     gap: 3rem;
 }
 .posts__container{
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 2rem;
 }
+.featured__container{
+    gap: 2rem;
+}
+.search__bar-container{
+    width: 50%;
+}
+
+}/*@media screen and (max-width: 1024px)*/
+
 
 /*SMALL DEVICES =================================*/
 
@@ -467,4 +595,31 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
     grid-template-columns: 1fr;
     gap: 0;
    }
- }
+   .featured .post__info{
+    padding: 1.2rem 0.5rem 0.5rem;
+   }
+   .featured .post__title{
+    font-size: 1.8rem;
+   }
+   .posts__container{
+    grid-template-columns: 1fr;
+   }
+   
+   .category__buttons-container{
+    grid-template-columns: 1fr 1fr;  
+   }
+   .footer__container{
+    grid-template-columns: 1fr ;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+   }
+   .search__bar-container{
+    width: 100%;
+   }
+   /*====================single post====================*/
+  .singlepost__container{
+    background-color: transparent;
+    padding: 4;
+   }
+  }
