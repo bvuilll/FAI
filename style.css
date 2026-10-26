@@ -258,6 +258,10 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
     flex-shrink: 0;
     object-fit: cover;
 }
+/*  أول قسم بعد النافبار الثابت ينزل تحته شاشه category-posts */
+nav + section{
+    margin-top: 7rem;
+}
 
 
 /*FEATURED ========================================================================*/
@@ -459,15 +463,31 @@ nav button{/* أزرار فتح/إغلاق القائمة بالجوال، مخ�
       width: var(--form-width);
       background: var(--fai-bg-deep);
       padding: 1rem 2rem 3rem;
-      border: 1px solid var(--fai-border);
+     /* border: 1px solid var(--fai-border);*/
     }
     .singlepost__thumbnail{
-        margin-top: 1.5rem; ;
+        margin: 1.5rem; ;
     }
     .singlepost__container p{
         margin-top: 1rem;
         line-height: 1.7;
     }
+
+/*CATEGORY POSTS===========================================================================================================*/
+  .category__title{
+    height: 10rem;
+    margin-top: 4.5rem;
+    display: grid;
+    place-items: center;
+  }
+
+/*EMPTY PAGE===========================================================================================================*/
+
+.empty__page{
+    display: grid;
+    place-items: center;
+    height: 70vh;
+}
    
   /* MEDIA QUERIES (MEDIUM DEVICES)========================================================================*/
    
